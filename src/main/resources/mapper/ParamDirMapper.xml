@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.ParamDirMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.ParamDir" >
+    <id column="PARAM_SEQ" property="paramSeq" jdbcType="CHAR" />
+    <result column="PARAM_DESC" property="paramDesc" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    PARAM_SEQ, PARAM_DESC
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.ParamDir" >
+    select
+    <include refid="Base_Column_List" />
+    from PARAM_DIR
+    where 1=1
+    <if test="paramSeq != null" >
+      and PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+    </if>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from PARAM_DIR
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from PARAM_DIR
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.imooc.demo.entity.ParamDir" >
+    insert into PARAM_DIR (PARAM_SEQ, PARAM_DESC)
+    values (#{paramSeq,jdbcType=CHAR}, #{paramDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.ParamDir" >
+    insert into PARAM_DIR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramSeq != null" >
+        PARAM_SEQ,
+      </if>
+      <if test="paramDesc != null" >
+        PARAM_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramSeq != null" >
+        #{paramSeq,jdbcType=CHAR},
+      </if>
+      <if test="paramDesc != null" >
+        #{paramDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.ParamDir" >
+    update PARAM_DIR
+    <set >
+      <if test="paramDesc != null" >
+        PARAM_DESC = #{paramDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.ParamDir" >
+    update PARAM_DIR
+    set PARAM_DESC = #{paramDesc,jdbcType=VARCHAR}
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+  </update>
+</mapper>

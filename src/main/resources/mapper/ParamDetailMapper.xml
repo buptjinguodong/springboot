@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.ParamDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.ParamDetail" >
+    <id column="PARAM_SEQ" property="paramSeq" jdbcType="CHAR" />
+    <id column="PARAM_KEY" property="paramKey" jdbcType="CHAR" />
+    <result column="PARAM_VALUE" property="paramValue" jdbcType="VARCHAR" />
+    <result column="PARAM_REMARK" property="paramRemark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    PARAM_SEQ, PARAM_KEY, PARAM_VALUE, PARAM_REMARK
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.ParamDetail" >
+    select
+    <include refid="Base_Column_List" />
+    from PARAM_DETAIL
+    where 1=1
+    <if test="paramSeq != null" >
+      and  PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+    </if>
+    <if test="paramKey != null" >
+      and PARAM_KEY = #{paramKey,jdbcType=CHAR}
+    </if>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.ParamDetailKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from PARAM_DETAIL
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+      and PARAM_KEY = #{paramKey,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.imooc.demo.entity.ParamDetailKey" >
+    delete from PARAM_DETAIL
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+      and PARAM_KEY = #{paramKey,jdbcType=CHAR}
+  </delete>
+
+  <delete id="deleteByParamSeq" parameterType="com.imooc.demo.entity.ParamDetailKey" >
+    delete from PARAM_DETAIL
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.imooc.demo.entity.ParamDetail" >
+    insert into PARAM_DETAIL (PARAM_SEQ, PARAM_KEY, PARAM_VALUE, 
+      PARAM_REMARK)
+    values (#{paramSeq,jdbcType=CHAR}, #{paramKey,jdbcType=CHAR}, #{paramValue,jdbcType=VARCHAR}, 
+      #{paramRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.ParamDetail" >
+    insert into PARAM_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paramSeq != null" >
+        PARAM_SEQ,
+      </if>
+      <if test="paramKey != null" >
+        PARAM_KEY,
+      </if>
+      <if test="paramValue != null" >
+        PARAM_VALUE,
+      </if>
+      <if test="paramRemark != null" >
+        PARAM_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paramSeq != null" >
+        #{paramSeq,jdbcType=CHAR},
+      </if>
+      <if test="paramKey != null" >
+        #{paramKey,jdbcType=CHAR},
+      </if>
+      <if test="paramValue != null" >
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramRemark != null" >
+        #{paramRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.ParamDetail" >
+    update PARAM_DETAIL
+    <set >
+      <if test="paramValue != null" >
+        PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="paramRemark != null" >
+        PARAM_REMARK = #{paramRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+      and PARAM_KEY = #{paramKey,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.ParamDetail" >
+    update PARAM_DETAIL
+    set PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+      PARAM_REMARK = #{paramRemark,jdbcType=VARCHAR}
+    where PARAM_SEQ = #{paramSeq,jdbcType=CHAR}
+      and PARAM_KEY = #{paramKey,jdbcType=CHAR}
+  </update>
+</mapper>
