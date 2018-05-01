@@ -1,8 +1,10 @@
 package com.imooc.demo.web;
 
+import com.google.gson.Gson;
 import com.imooc.demo.entity.ParamDetail;
 import com.imooc.demo.entity.ParamDir;
 import com.imooc.demo.service.ParamService;
+import com.imooc.demo.utils.ComFun;
 import com.imooc.demo.utils.ConstantUtil;
 import com.imooc.demo.vo.A06280201OutVo;
 import com.imooc.demo.vo.A06280202InVo;
@@ -22,10 +24,13 @@ public class ParamController {
     @Autowired
     ParamService paramService;
 
+    Gson gson = new Gson();
+
     @RequestMapping("/A06280201")
-    public A06280201OutVo queryParamDir(ParamDir paramDir){
+    public A06280201OutVo queryParamDir(@RequestBody ParamDir paramDir){
         A06280201OutVo outVo = new A06280201OutVo();
         List<ParamDir> paramDirList;
+        ComFun.log(gson.toJson(paramDir));
         paramDirList = paramService.queryParamDir(paramDir);
         outVo.setRows(paramDirList);
         outVo.setTotal(paramDirList.size());

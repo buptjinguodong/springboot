@@ -1,7 +1,7 @@
 
-var commonParamEdit = {};
+var commonParamDetailEdit = {};
 
-commonParamEdit.init = function() {
+commonParamDetailEdit.init = function() {
     var that = this;
 
     that.mytable = new JPF.ui.table(
@@ -10,8 +10,9 @@ commonParamEdit.init = function() {
             removeId: "#remove",
             idField: "paramSeq",
             toolbar: "#toolbar",
-            url: "/demo/param/A06280201",
+            url: "/demo/param/A06280202",
             jsonData: {
+                "svcTpcd":"04",
                 "paramSeq":"0000000001"
             },
             responseHandler: function(res) {
@@ -22,37 +23,21 @@ commonParamEdit.init = function() {
                     {
                         field: '',
                         checkbox: true,
-                        rowspan: 2,
                         align: 'center',
                         valign: 'middle'
                     }, {
                         title: '参数序号',
                         field: 'paramSeq',
-                        rowspan: 2,
                         align: 'center',
                         valign: 'middle',
-                        sortable: true,
-                        formatter: function(value, row, index) {
-                            return [
-                                '<a class="like" href="/demo/pages/param/commonParamDetailEdit?svcTpcd=04&paramSeq='+value+'" title="Like">',
-                                value,
-                                '</a>  '
-                            ].join('');
-                        }
+                        sortable: true
                     }, {
-                        title: '参数内容',
-                        colspan: 2,
-                        align: 'center'
-                    }
-                ],
-                [
-                    {
-                        field: 'paramDesc',
+                        field: 'paramKey',
                         title: '参数描述',
                         sortable: true,
                         editable: true,
                         align: 'center'
-                    },{
+                    }, {
                         field: 'operate',
                         title: '操作',
                         align: 'center',
@@ -67,7 +52,7 @@ commonParamEdit.init = function() {
                                 });
                             }
                         },
-                        formatter: function(value, row, index) {
+                        formatter: function (value, row, index) {
                             return [
                                 '<a class="like" href="javascript:void(0)" title="Like">',
                                 '<i class="glyphicon glyphicon-heart"></i>',
@@ -82,12 +67,11 @@ commonParamEdit.init = function() {
             ]
         }
     );
-
-
-
 };
 
 
+
+
 $(document).ready(function(){
-    commonParamEdit.init();
+    commonParamDetailEdit.init();
 });

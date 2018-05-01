@@ -19,12 +19,12 @@
     <script type="text/javascript" src="table.js"></script>
     <script type="text/javascript" src="/demo/js/common.js"></script>
 
-    <title>Document</title>
+    <title>参数详情维护</title>
 </head>
 <body>
 <div class="container-fluid">
     <div class="page-header">
-        <h1>系统公共参数维护</h1>
+        <h1>参数详情维护</h1>
     </div>
     <form class="form-inline">
         <div class="row">
@@ -34,15 +34,9 @@
                     <input type="text" class="form-control" id="paramSeq" name="paramSeq" placeholder="参数序号" aria-describedby="basic-addon1">
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="paramDesc">参数描述：</label>
-                    <input type="text" class="form-control" id="paramDesc" placeholder="参数描述">
-                </div>
-            </div>
         </div>
         <div class="row text-center">
-            <button type="button" class="btn btn-primary" id="query">列式</button>
+            <button type="button" class="btn btn-primary" id="query">查询</button>
             <button type="button" class="btn btn-primary" id="reset">重置</button>
         </div>
     </form>
@@ -54,16 +48,12 @@
                 <i class="glyphicon glyphicon-remove"></i> Delete
             </button>
         </div>
-
-        <!-- data-toolbar="#toolbar" - 将Toolbar 放置于#toolbar中  -->
-        <!-- data-show-export="true" - 有什么作用呢？-->
-        <!-- data-detail-view="true" - 是否展示列式详情，若需要展示则按照data-detail-formatter定义的函数进行格式化-->
-        <!-- data-id-field="id" - 什么作用？-->
-        <!-- data-side-pagination="server" - 服务端分页-->
-        <!-- data-response-handler="commonParamEdit.responseHandler" - 什么作用？-->
         <table id="table"></table>
     </div>
+    <script>
+
+    </script>
 </div>
-<script src="commonParamEdit.js"></script>
+<script src="commonParamDetailEdit.js"></script>
 </body>
 </html>
