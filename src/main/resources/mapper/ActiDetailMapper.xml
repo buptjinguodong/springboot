@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.ActiDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.ActiDetail" >
+    <id column="ACTI_ID" property="actiId" jdbcType="CHAR" />
+    <result column="ACTI_BASEINFO" property="actiBaseinfo" jdbcType="VARCHAR" />
+    <result column="ACTI_PREPARE" property="actiPrepare" jdbcType="VARCHAR" />
+    <result column="ACTI_PRICE_DETAIL" property="actiPriceDetail" jdbcType="VARCHAR" />
+    <result column="ACTI_APLY_DETAIL" property="actiAplyDetail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ACTI_ID, ACTI_BASEINFO, ACTI_PREPARE, ACTI_PRICE_DETAIL, ACTI_APLY_DETAIL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACTI_DETAIL
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ACTI_DETAIL
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.demo.entity.ActiDetail" >
+    insert into ACTI_DETAIL (ACTI_ID, ACTI_BASEINFO, ACTI_PREPARE, 
+      ACTI_PRICE_DETAIL, ACTI_APLY_DETAIL)
+    values (#{actiId,jdbcType=CHAR}, #{actiBaseinfo,jdbcType=VARCHAR}, #{actiPrepare,jdbcType=VARCHAR}, 
+      #{actiPriceDetail,jdbcType=VARCHAR}, #{actiAplyDetail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.ActiDetail" >
+    insert into ACTI_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actiId != null" >
+        ACTI_ID,
+      </if>
+      <if test="actiBaseinfo != null" >
+        ACTI_BASEINFO,
+      </if>
+      <if test="actiPrepare != null" >
+        ACTI_PREPARE,
+      </if>
+      <if test="actiPriceDetail != null" >
+        ACTI_PRICE_DETAIL,
+      </if>
+      <if test="actiAplyDetail != null" >
+        ACTI_APLY_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actiId != null" >
+        #{actiId,jdbcType=CHAR},
+      </if>
+      <if test="actiBaseinfo != null" >
+        #{actiBaseinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="actiPrepare != null" >
+        #{actiPrepare,jdbcType=VARCHAR},
+      </if>
+      <if test="actiPriceDetail != null" >
+        #{actiPriceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="actiAplyDetail != null" >
+        #{actiAplyDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.ActiDetail" >
+    update ACTI_DETAIL
+    <set >
+      <if test="actiBaseinfo != null" >
+        ACTI_BASEINFO = #{actiBaseinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="actiPrepare != null" >
+        ACTI_PREPARE = #{actiPrepare,jdbcType=VARCHAR},
+      </if>
+      <if test="actiPriceDetail != null" >
+        ACTI_PRICE_DETAIL = #{actiPriceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="actiAplyDetail != null" >
+        ACTI_APLY_DETAIL = #{actiAplyDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.ActiDetail" >
+    update ACTI_DETAIL
+    set ACTI_BASEINFO = #{actiBaseinfo,jdbcType=VARCHAR},
+      ACTI_PREPARE = #{actiPrepare,jdbcType=VARCHAR},
+      ACTI_PRICE_DETAIL = #{actiPriceDetail,jdbcType=VARCHAR},
+      ACTI_APLY_DETAIL = #{actiAplyDetail,jdbcType=VARCHAR}
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </update>
+</mapper>

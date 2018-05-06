@@ -27,24 +27,26 @@ JPF.ui.table=function(option) {
                 params.paramSeq = _jsonData.paramSeq;
                 return params;
             },
-            height: getHeight(),
+            // height: getHeight(),
             detailFormatter: that.detailFormatter,
             toolbar: _toolbar,
-            search: "true",
-            showRefresh: "true",
-            showToggle: "true",
-            showColumns: "true",
-            showExport: "true",
-            detailView: "true",
-            minimumCountColumns: "2",
-            showPaginationSwitch: "true",
-            pagination: "true",
+            search: true,
+            showRefresh: true,
+            showToggle: true,
+            showColumns: true,
+            showExport: true,
+            detailView: true,
+            minimumCountColumns: 2,
+            showPaginationSwitch: true,
+            pagination: true,
             idField: _idField,
-            pageList:"[10, 25, 50, 100, ALL]",
-            showFooter:"false",
+            pageList:['10', '25', '50', '100', 'ALL'],
+            showFooter:false,
             sidePagination:"server",
             url: _url,
-            responseHandler: _responseHandler,
+            responseHandler: function(data) {
+                return _responseHandler(data);
+            },
             columns: _columns
         });
         // sometimes footer render error.
@@ -74,9 +76,9 @@ JPF.ui.table=function(option) {
             $remove.prop('disabled', true);
         });
         $(window).resize(function () {
-            $table.bootstrapTable('resetView', {
-                height: getHeight()
-            });
+            // $table.bootstrapTable('resetView', {
+            //     height: getHeight()
+            // });
         });
     }
 

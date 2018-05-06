@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.ActiAplyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.ActiAplyInfo" >
+    <id column="APLY_ID" property="aplyId" jdbcType="CHAR" />
+    <result column="ACTI_ID" property="actiId" jdbcType="CHAR" />
+    <result column="USER_ID" property="userId" jdbcType="CHAR" />
+    <result column="APLY_USER_AMOUNT" property="aplyUserAmount" jdbcType="INTEGER" />
+    <result column="APLY_TIME" property="aplyTime" jdbcType="TIMESTAMP" />
+    <result column="APLY_PRICE_TOTAL" property="aplyPriceTotal" jdbcType="INTEGER" />
+    <result column="APLY_PRICE_PRE" property="aplyPricePre" jdbcType="INTEGER" />
+    <result column="APLY_REPORT_IND" property="aplyReportInd" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APLY_ID, ACTI_ID, USER_ID, APLY_USER_AMOUNT, APLY_TIME, APLY_PRICE_TOTAL, APLY_PRICE_PRE, 
+    APLY_REPORT_IND
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.ActiAplyInfo">
+    select
+    <include refid="Base_Column_List" />
+    from ACTI_APLY_INFO
+    where 1=1
+    <if test="aplyId != null" >
+      and APLY_ID = #{aplyId,jdbcType=CHAR}
+    </if>
+    <if test="actiId != null" >
+      and ACTI_ID = #{actiId,jdbcType=CHAR},
+    </if>
+    <if test="userId != null" >
+      and USER_ID = #{userId,jdbcType=CHAR},
+    </if>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACTI_APLY_INFO
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ACTI_APLY_INFO
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.demo.entity.ActiAplyInfo" >
+    insert into ACTI_APLY_INFO (APLY_ID, ACTI_ID, USER_ID, 
+      APLY_USER_AMOUNT, APLY_TIME, APLY_PRICE_TOTAL, 
+      APLY_PRICE_PRE, APLY_REPORT_IND)
+    values (#{aplyId,jdbcType=CHAR}, #{actiId,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, 
+      #{aplyUserAmount,jdbcType=INTEGER}, #{aplyTime,jdbcType=TIMESTAMP}, #{aplyPriceTotal,jdbcType=INTEGER}, 
+      #{aplyPricePre,jdbcType=INTEGER}, #{aplyReportInd,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.ActiAplyInfo" >
+    insert into ACTI_APLY_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aplyId != null" >
+        APLY_ID,
+      </if>
+      <if test="actiId != null" >
+        ACTI_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="aplyUserAmount != null" >
+        APLY_USER_AMOUNT,
+      </if>
+      <if test="aplyTime != null" >
+        APLY_TIME,
+      </if>
+      <if test="aplyPriceTotal != null" >
+        APLY_PRICE_TOTAL,
+      </if>
+      <if test="aplyPricePre != null" >
+        APLY_PRICE_PRE,
+      </if>
+      <if test="aplyReportInd != null" >
+        APLY_REPORT_IND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aplyId != null" >
+        #{aplyId,jdbcType=CHAR},
+      </if>
+      <if test="actiId != null" >
+        #{actiId,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="aplyUserAmount != null" >
+        #{aplyUserAmount,jdbcType=INTEGER},
+      </if>
+      <if test="aplyTime != null" >
+        #{aplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplyPriceTotal != null" >
+        #{aplyPriceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="aplyPricePre != null" >
+        #{aplyPricePre,jdbcType=INTEGER},
+      </if>
+      <if test="aplyReportInd != null" >
+        #{aplyReportInd,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.ActiAplyInfo" >
+    update ACTI_APLY_INFO
+    <set >
+      <if test="actiId != null" >
+        ACTI_ID = #{actiId,jdbcType=CHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="aplyUserAmount != null" >
+        APLY_USER_AMOUNT = #{aplyUserAmount,jdbcType=INTEGER},
+      </if>
+      <if test="aplyTime != null" >
+        APLY_TIME = #{aplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplyPriceTotal != null" >
+        APLY_PRICE_TOTAL = #{aplyPriceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="aplyPricePre != null" >
+        APLY_PRICE_PRE = #{aplyPricePre,jdbcType=INTEGER},
+      </if>
+      <if test="aplyReportInd != null" >
+        APLY_REPORT_IND = #{aplyReportInd,jdbcType=CHAR},
+      </if>
+    </set>
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.ActiAplyInfo" >
+    update ACTI_APLY_INFO
+    set ACTI_ID = #{actiId,jdbcType=CHAR},
+      USER_ID = #{userId,jdbcType=CHAR},
+      APLY_USER_AMOUNT = #{aplyUserAmount,jdbcType=INTEGER},
+      APLY_TIME = #{aplyTime,jdbcType=TIMESTAMP},
+      APLY_PRICE_TOTAL = #{aplyPriceTotal,jdbcType=INTEGER},
+      APLY_PRICE_PRE = #{aplyPricePre,jdbcType=INTEGER},
+      APLY_REPORT_IND = #{aplyReportInd,jdbcType=CHAR}
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </update>
+</mapper>

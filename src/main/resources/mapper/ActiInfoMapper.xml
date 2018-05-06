@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.ActiInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.ActiInfo" >
+    <id column="ACTI_ID" property="actiId" jdbcType="CHAR" />
+    <result column="ACTI_TITLE" property="actiTitle" jdbcType="VARCHAR" />
+    <result column="ACTI_ADDR" property="actiAddr" jdbcType="VARCHAR" />
+    <result column="ACTI_START_DATE" property="actiStartDate" jdbcType="CHAR" />
+    <result column="ACTI_END_DATE" property="actiEndDate" jdbcType="CHAR" />
+    <result column="ACTI_PRICE_TOTAL" property="actiPriceTotal" jdbcType="INTEGER" />
+    <result column="ACTI_PRICE_PRE" property="actiPricePre" jdbcType="INTEGER" />
+    <result column="ACTI_CREATOR" property="actiCreator" jdbcType="VARCHAR" />
+    <result column="ACTI_CREATOR_ID" property="actiCreatorId" jdbcType="CHAR" />
+    <result column="ACTI_CAPACITY" property="actiCapacity" jdbcType="INTEGER" />
+    <result column="ACTI_APLY_TIME" property="actiAplyTime" jdbcType="TIMESTAMP" />
+    <result column="ACTI_STATUS_CD" property="actiStatusCd" jdbcType="CHAR" />
+    <result column="ACTI_ABS" property="actiAbs" jdbcType="VARCHAR" />
+    <result column="ACTI_IMGS" property="actiImgs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ACTI_ID, ACTI_TITLE, ACTI_ADDR, ACTI_START_DATE, ACTI_END_DATE, ACTI_PRICE_TOTAL, 
+    ACTI_PRICE_PRE, ACTI_CREATOR, ACTI_CREATOR_ID, ACTI_CAPACITY, ACTI_APLY_TIME, ACTI_STATUS_CD, 
+    ACTI_ABS, ACTI_IMGS
+  </sql>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.ActiInfo" >
+    select
+    <include refid="Base_Column_List" />
+    from ACTI_INFO
+    where 1=1
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACTI_INFO
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ACTI_INFO
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.demo.entity.ActiInfo" >
+    insert into ACTI_INFO (ACTI_ID, ACTI_TITLE, ACTI_ADDR, 
+      ACTI_START_DATE, ACTI_END_DATE, ACTI_PRICE_TOTAL, 
+      ACTI_PRICE_PRE, ACTI_CREATOR, ACTI_CREATOR_ID, 
+      ACTI_CAPACITY, ACTI_APLY_TIME, ACTI_STATUS_CD, 
+      ACTI_ABS, ACTI_IMGS)
+    values (#{actiId,jdbcType=CHAR}, #{actiTitle,jdbcType=VARCHAR}, #{actiAddr,jdbcType=VARCHAR}, 
+      #{actiStartDate,jdbcType=CHAR}, #{actiEndDate,jdbcType=CHAR}, #{actiPriceTotal,jdbcType=INTEGER}, 
+      #{actiPricePre,jdbcType=INTEGER}, #{actiCreator,jdbcType=VARCHAR}, #{actiCreatorId,jdbcType=CHAR}, 
+      #{actiCapacity,jdbcType=INTEGER}, #{actiAplyTime,jdbcType=TIMESTAMP}, #{actiStatusCd,jdbcType=CHAR}, 
+      #{actiAbs,jdbcType=VARCHAR}, #{actiImgs,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.ActiInfo" >
+    insert into ACTI_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="actiId != null" >
+        ACTI_ID,
+      </if>
+      <if test="actiTitle != null" >
+        ACTI_TITLE,
+      </if>
+      <if test="actiAddr != null" >
+        ACTI_ADDR,
+      </if>
+      <if test="actiStartDate != null" >
+        ACTI_START_DATE,
+      </if>
+      <if test="actiEndDate != null" >
+        ACTI_END_DATE,
+      </if>
+      <if test="actiPriceTotal != null" >
+        ACTI_PRICE_TOTAL,
+      </if>
+      <if test="actiPricePre != null" >
+        ACTI_PRICE_PRE,
+      </if>
+      <if test="actiCreator != null" >
+        ACTI_CREATOR,
+      </if>
+      <if test="actiCreatorId != null" >
+        ACTI_CREATOR_ID,
+      </if>
+      <if test="actiCapacity != null" >
+        ACTI_CAPACITY,
+      </if>
+      <if test="actiAplyTime != null" >
+        ACTI_APLY_TIME,
+      </if>
+      <if test="actiStatusCd != null" >
+        ACTI_STATUS_CD,
+      </if>
+      <if test="actiAbs != null" >
+        ACTI_ABS,
+      </if>
+      <if test="actiImgs != null" >
+        ACTI_IMGS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="actiId != null" >
+        #{actiId,jdbcType=CHAR},
+      </if>
+      <if test="actiTitle != null" >
+        #{actiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="actiAddr != null" >
+        #{actiAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="actiStartDate != null" >
+        #{actiStartDate,jdbcType=CHAR},
+      </if>
+      <if test="actiEndDate != null" >
+        #{actiEndDate,jdbcType=CHAR},
+      </if>
+      <if test="actiPriceTotal != null" >
+        #{actiPriceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="actiPricePre != null" >
+        #{actiPricePre,jdbcType=INTEGER},
+      </if>
+      <if test="actiCreator != null" >
+        #{actiCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="actiCreatorId != null" >
+        #{actiCreatorId,jdbcType=CHAR},
+      </if>
+      <if test="actiCapacity != null" >
+        #{actiCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="actiAplyTime != null" >
+        #{actiAplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actiStatusCd != null" >
+        #{actiStatusCd,jdbcType=CHAR},
+      </if>
+      <if test="actiAbs != null" >
+        #{actiAbs,jdbcType=VARCHAR},
+      </if>
+      <if test="actiImgs != null" >
+        #{actiImgs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.ActiInfo" >
+    update ACTI_INFO
+    <set >
+      <if test="actiTitle != null" >
+        ACTI_TITLE = #{actiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="actiAddr != null" >
+        ACTI_ADDR = #{actiAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="actiStartDate != null" >
+        ACTI_START_DATE = #{actiStartDate,jdbcType=CHAR},
+      </if>
+      <if test="actiEndDate != null" >
+        ACTI_END_DATE = #{actiEndDate,jdbcType=CHAR},
+      </if>
+      <if test="actiPriceTotal != null" >
+        ACTI_PRICE_TOTAL = #{actiPriceTotal,jdbcType=INTEGER},
+      </if>
+      <if test="actiPricePre != null" >
+        ACTI_PRICE_PRE = #{actiPricePre,jdbcType=INTEGER},
+      </if>
+      <if test="actiCreator != null" >
+        ACTI_CREATOR = #{actiCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="actiCreatorId != null" >
+        ACTI_CREATOR_ID = #{actiCreatorId,jdbcType=CHAR},
+      </if>
+      <if test="actiCapacity != null" >
+        ACTI_CAPACITY = #{actiCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="actiAplyTime != null" >
+        ACTI_APLY_TIME = #{actiAplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actiStatusCd != null" >
+        ACTI_STATUS_CD = #{actiStatusCd,jdbcType=CHAR},
+      </if>
+      <if test="actiAbs != null" >
+        ACTI_ABS = #{actiAbs,jdbcType=VARCHAR},
+      </if>
+      <if test="actiImgs != null" >
+        ACTI_IMGS = #{actiImgs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.ActiInfo" >
+    update ACTI_INFO
+    set ACTI_TITLE = #{actiTitle,jdbcType=VARCHAR},
+      ACTI_ADDR = #{actiAddr,jdbcType=VARCHAR},
+      ACTI_START_DATE = #{actiStartDate,jdbcType=CHAR},
+      ACTI_END_DATE = #{actiEndDate,jdbcType=CHAR},
+      ACTI_PRICE_TOTAL = #{actiPriceTotal,jdbcType=INTEGER},
+      ACTI_PRICE_PRE = #{actiPricePre,jdbcType=INTEGER},
+      ACTI_CREATOR = #{actiCreator,jdbcType=VARCHAR},
+      ACTI_CREATOR_ID = #{actiCreatorId,jdbcType=CHAR},
+      ACTI_CAPACITY = #{actiCapacity,jdbcType=INTEGER},
+      ACTI_APLY_TIME = #{actiAplyTime,jdbcType=TIMESTAMP},
+      ACTI_STATUS_CD = #{actiStatusCd,jdbcType=CHAR},
+      ACTI_ABS = #{actiAbs,jdbcType=VARCHAR},
+      ACTI_IMGS = #{actiImgs,jdbcType=VARCHAR}
+    where ACTI_ID = #{actiId,jdbcType=CHAR}
+  </update>
+</mapper>

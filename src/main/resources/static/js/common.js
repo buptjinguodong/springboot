@@ -19,6 +19,27 @@ Common.isObjUsable = function(obj){
 		return true;
 	}
 };
+Common.getUrlParam = function(name){
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+};
+
+Common.alert = function(msg){
+	alert(msg);
+};
+
+Common.getFirstChecked = function(allData){
+    var selectInd = -1;
+    for(var i=0; i<allData.length; i++){
+        if(allData[i].check == true){
+            selectInd = i;
+            break;
+        }
+    }
+    return selectInd;
+};
+
 Common.post = function(options){
 	var thisVar = this;
 	// 参数异常

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.ActiAplyDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.ActiAplyDetail" >
+    <id column="APLY_ID" property="aplyId" jdbcType="CHAR" />
+    <result column="APLY_USER_NAME" property="aplyUserName" jdbcType="CHAR" />
+    <result column="TEL_PHONE" property="telPhone" jdbcType="CHAR" />
+    <result column="USER_GENDER" property="userGender" jdbcType="CHAR" />
+    <result column="APLY_ABOARD_CD" property="aplyAboardCd" jdbcType="CHAR" />
+    <result column="APLY_ABOARD_NAME" property="aplyAboardName" jdbcType="VARCHAR" />
+    <result column="APLY_REMARK" property="aplyRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APLY_ID, APLY_USER_NAME, TEL_PHONE, USER_GENDER, APLY_ABOARD_CD, APLY_ABOARD_NAME, 
+    APLY_REMARK
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.ActiAplyDetail">
+    select
+    <include refid="Base_Column_List" />
+    from ACTI_APLY_DETAIL
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACTI_APLY_DETAIL
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ACTI_APLY_DETAIL
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.demo.entity.ActiAplyDetail" >
+    insert into ACTI_APLY_DETAIL (APLY_ID, APLY_USER_NAME, TEL_PHONE, 
+      USER_GENDER, APLY_ABOARD_CD, APLY_ABOARD_NAME, 
+      APLY_REMARK)
+    values (#{aplyId,jdbcType=CHAR}, #{aplyUserName,jdbcType=CHAR}, #{telPhone,jdbcType=CHAR}, 
+      #{userGender,jdbcType=CHAR}, #{aplyAboardCd,jdbcType=CHAR}, #{aplyAboardName,jdbcType=VARCHAR}, 
+      #{aplyRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.ActiAplyDetail" >
+    insert into ACTI_APLY_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aplyId != null" >
+        APLY_ID,
+      </if>
+      <if test="aplyUserName != null" >
+        APLY_USER_NAME,
+      </if>
+      <if test="telPhone != null" >
+        TEL_PHONE,
+      </if>
+      <if test="userGender != null" >
+        USER_GENDER,
+      </if>
+      <if test="aplyAboardCd != null" >
+        APLY_ABOARD_CD,
+      </if>
+      <if test="aplyAboardName != null" >
+        APLY_ABOARD_NAME,
+      </if>
+      <if test="aplyRemark != null" >
+        APLY_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aplyId != null" >
+        #{aplyId,jdbcType=CHAR},
+      </if>
+      <if test="aplyUserName != null" >
+        #{aplyUserName,jdbcType=CHAR},
+      </if>
+      <if test="telPhone != null" >
+        #{telPhone,jdbcType=CHAR},
+      </if>
+      <if test="userGender != null" >
+        #{userGender,jdbcType=CHAR},
+      </if>
+      <if test="aplyAboardCd != null" >
+        #{aplyAboardCd,jdbcType=CHAR},
+      </if>
+      <if test="aplyAboardName != null" >
+        #{aplyAboardName,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyRemark != null" >
+        #{aplyRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.ActiAplyDetail" >
+    update ACTI_APLY_DETAIL
+    <set >
+      <if test="aplyUserName != null" >
+        APLY_USER_NAME = #{aplyUserName,jdbcType=CHAR},
+      </if>
+      <if test="telPhone != null" >
+        TEL_PHONE = #{telPhone,jdbcType=CHAR},
+      </if>
+      <if test="userGender != null" >
+        USER_GENDER = #{userGender,jdbcType=CHAR},
+      </if>
+      <if test="aplyAboardCd != null" >
+        APLY_ABOARD_CD = #{aplyAboardCd,jdbcType=CHAR},
+      </if>
+      <if test="aplyAboardName != null" >
+        APLY_ABOARD_NAME = #{aplyAboardName,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyRemark != null" >
+        APLY_REMARK = #{aplyRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.ActiAplyDetail" >
+    update ACTI_APLY_DETAIL
+    set APLY_USER_NAME = #{aplyUserName,jdbcType=CHAR},
+      TEL_PHONE = #{telPhone,jdbcType=CHAR},
+      USER_GENDER = #{userGender,jdbcType=CHAR},
+      APLY_ABOARD_CD = #{aplyAboardCd,jdbcType=CHAR},
+      APLY_ABOARD_NAME = #{aplyAboardName,jdbcType=VARCHAR},
+      APLY_REMARK = #{aplyRemark,jdbcType=VARCHAR}
+    where APLY_ID = #{aplyId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -12,7 +12,7 @@ commonParamEdit.init = function() {
             toolbar: "#toolbar",
             url: "/demo/param/A06280201",
             jsonData: {
-                "paramSeq":"0000000001"
+                "paramSeq":""
             },
             responseHandler: function(res) {
                 return res;
@@ -83,8 +83,32 @@ commonParamEdit.init = function() {
         }
     );
 
-
-
+    // 按钮
+    $("#query").click(function(){
+       that.queryAction();
+    });
+    $("#reset").click(function () {
+        that.resetAction();
+    })
+};
+commonParamEdit.queryAction = function(){
+    var that = this;
+    var jsonData = {
+        paramSeq: $("#paramSeq").val()
+    };
+    Common.post({
+        data: JSON.stringify(jsonData),
+        fw_url: "/param/A06280201",
+        success: function(data){
+            that.querySucc(data);
+        }
+    });
+};
+commonParamEdit.querySucc = function(data){
+    var that = this;
+    that.respA06280201 = data;
+    that.mytable.bootstrapTable("load", that.respA06280201);
+    console.log(data);
 };
 
 

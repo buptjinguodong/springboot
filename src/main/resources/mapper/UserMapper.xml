@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.User" >
+    <id column="USER_ID" property="userId" jdbcType="CHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="CHAR" />
+    <result column="TEL_PHONE" property="telPhone" jdbcType="CHAR" />
+    <result column="USER_PASSWD" property="userPasswd" jdbcType="CHAR" />
+    <result column="LOGIN_DATE" property="loginDate" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_NAME, TEL_PHONE, USER_PASSWD, LOGIN_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USER
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USER
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.demo.entity.User" >
+    insert into USER (USER_ID, USER_NAME, TEL_PHONE, 
+      USER_PASSWD, LOGIN_DATE)
+    values (#{userId,jdbcType=CHAR}, #{userName,jdbcType=CHAR}, #{telPhone,jdbcType=CHAR}, 
+      #{userPasswd,jdbcType=CHAR}, #{loginDate,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.User" >
+    insert into USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="telPhone != null" >
+        TEL_PHONE,
+      </if>
+      <if test="userPasswd != null" >
+        USER_PASSWD,
+      </if>
+      <if test="loginDate != null" >
+        LOGIN_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=CHAR},
+      </if>
+      <if test="telPhone != null" >
+        #{telPhone,jdbcType=CHAR},
+      </if>
+      <if test="userPasswd != null" >
+        #{userPasswd,jdbcType=CHAR},
+      </if>
+      <if test="loginDate != null" >
+        #{loginDate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.User" >
+    update USER
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=CHAR},
+      </if>
+      <if test="telPhone != null" >
+        TEL_PHONE = #{telPhone,jdbcType=CHAR},
+      </if>
+      <if test="userPasswd != null" >
+        USER_PASSWD = #{userPasswd,jdbcType=CHAR},
+      </if>
+      <if test="loginDate != null" >
+        LOGIN_DATE = #{loginDate,jdbcType=CHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.User" >
+    update USER
+    set USER_NAME = #{userName,jdbcType=CHAR},
+      TEL_PHONE = #{telPhone,jdbcType=CHAR},
+      USER_PASSWD = #{userPasswd,jdbcType=CHAR},
+      LOGIN_DATE = #{loginDate,jdbcType=CHAR}
+    where USER_ID = #{userId,jdbcType=CHAR}
+  </update>
+</mapper>
