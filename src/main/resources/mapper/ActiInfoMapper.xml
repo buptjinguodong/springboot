@@ -27,6 +27,9 @@
     <include refid="Base_Column_List" />
     from ACTI_INFO
     where 1=1
+    <if test="actiAddr != null" >
+      and ACTI_ADDR like '*'#{actiAddr,jdbcType=VARCHAR}'*'
+    </if>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
