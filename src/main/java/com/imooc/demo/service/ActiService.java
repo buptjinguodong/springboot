@@ -10,4 +10,6 @@ public interface ActiService {
     List<ActiInfo> enquireActiList(ActiInfo actiInfo);
 
     ActiDetail enquireActiDetail(String actiId);
+
+    void dealActiDetail();
 }

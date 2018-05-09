@@ -5,10 +5,14 @@ import com.imooc.demo.dao.ActiDetailMapper;
 import com.imooc.demo.dao.ActiInfoMapper;
 import com.imooc.demo.entity.ActiDetail;
 import com.imooc.demo.entity.ActiInfo;
+import com.imooc.demo.utils.A0628BeanConstants;
 import com.imooc.demo.utils.ComFun;
+import com.imooc.demo.utils.DataBusUtils;
 import com.imooc.demo.utils.DateUtil;
+import com.imooc.demo.vo.A06280102OutVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -76,5 +80,25 @@ public class ActiServiceTest {
         actiDetail.setActiPrepare("活动准备");
         actiDetail.setActiPriceDetail("价格说明");
         actiDetailMapper.insert(actiDetail);
+    }
+
+    @Test
+    public void test4DealActiInfo() {
+        ActiInfo actiInfo = new ActiInfo();
+        actiInfo.setActiId("20180507000001");
+        actiInfo.setActiStatusCd("01");
+        actiInfo.setActiTitle("shiyi下");
+
+        DataBusUtils.setValue(A0628BeanConstants.ACTI_INFO, actiInfo);
+        DataBusUtils.setValue(A0628BeanConstants.SVC_TPCD, "04");
+
+        actiService.dealActiDetail();
+
+        // 工厂 产生 响应Vo
+        actiInfo  = (ActiInfo) DataBusUtils.getValue(A0628BeanConstants.ACTI_INFO);
+        A06280102OutVo outVo = new A06280102OutVo();
+        BeanUtils.copyProperties(actiInfo,outVo);
+
+        ComFun.log(gson.toJson(outVo));
     }
 }
