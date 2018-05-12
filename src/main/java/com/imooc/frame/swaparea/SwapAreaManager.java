@@ -1,7 +1,10 @@
+package com.imooc.frame.swaparea;
+
 public interface SwapAreaManager {
-	SwapArea buildNewSwapArea();
 
-	SwapArea getCurrentSwapArea();
+	public SwapArea buildNewSwapArea();
 
-	SwapArea releaseCurrentSwapArea();
+	public SwapArea getCurrentSwapArea();
+
+	public SwapArea releaseCurrentSwapArea();
 }

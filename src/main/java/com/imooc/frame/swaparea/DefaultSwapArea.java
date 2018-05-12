@@ -1,4 +1,8 @@
-public class DefaultSwapArea extends HashMap implements SwapArea{
+package com.imooc.frame.swaparea;
+
+import java.util.HashMap;
+
+public class DefaultSwapArea extends HashMap implements SwapArea {
 	private static final long serialVersionUID = 123L;
 
 	@Override
@@ -13,7 +17,7 @@ public class DefaultSwapArea extends HashMap implements SwapArea{
 
 	@Override
 	public void setValue(String path, Object value) {
-		this.set(path, value);
+		this.put(path, value);
 	}
 
 	@Override

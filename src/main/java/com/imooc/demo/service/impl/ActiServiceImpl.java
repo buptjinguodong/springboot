@@ -34,7 +34,7 @@ public class ActiServiceImpl implements ActiService {
     }
 
     @Override
-    public void dealActiDetail() {
+    public void dealActiInfo() {
         String svcTpcd = (String) DataBusUtils.getValue(A0628BeanConstants.SVC_TPCD);
         ActiInfo actiInfo = (ActiInfo) DataBusUtils.getValue(A0628BeanConstants.ACTI_INFO);
 
@@ -56,6 +56,30 @@ public class ActiServiceImpl implements ActiService {
         }
 
         DataBusUtils.setValue(A0628BeanConstants.ACTI_INFO, actiInfo);
+    }
+
+    public void dealActiDetail() {
+        String svcTpcd = (String) DataBusUtils.getValue(A0628BeanConstants.SVC_TPCD);
+        ActiDetail actiDetail = (ActiDetail) DataBusUtils.getValue(A0628BeanConstants.ACTI_DETAIL);
+
+        switch (svcTpcd) {
+            case ConstantUtil.SVC_TPCD_ADD:
+                actiDetailMapper.insert(actiDetail);
+                break;
+            case ConstantUtil.SVC_TPCD_DELETE:
+                actiDetailMapper.deleteByPrimaryKey(actiDetail.getActiId());
+                break;
+            case ConstantUtil.SVC_TPCD_EDIT:
+                actiDetailMapper.updateByPrimaryKey(actiDetail);
+                break;
+            case ConstantUtil.SVC_TPCD_QUERY:
+                actiDetail = actiDetailMapper.selectByPrimaryKey(actiDetail.getActiId());
+                break;
+            default:
+                break;
+        }
+
+        DataBusUtils.setValue(A0628BeanConstants.ACTI_DETAIL, actiDetail);
     }
 
 }

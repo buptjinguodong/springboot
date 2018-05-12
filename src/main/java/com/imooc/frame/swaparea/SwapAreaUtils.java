@@ -1,13 +1,14 @@
+package com.imooc.frame.swaparea;
 
 public class SwapAreaUtils implements SwapAreaStatics {
 
-	private static SwapAreaManager swapAreaManager;
+	private static SwapAreaManager swapAreaManager = new DefaultSwapAreaManager(new ThreadLocalSwapAreaHolder());
 
 	public static SwapArea buildNewSwapArea() {
-		if (swapAreaManager != null) {
+		if (swapAreaManager.getCurrentSwapArea() == null) {
 			return swapAreaManager.buildNewSwapArea();
 		}
-		return null;
+		return swapAreaManager.getCurrentSwapArea();
 	}
 
 	public static SwapArea getCurrentSwapArea() {

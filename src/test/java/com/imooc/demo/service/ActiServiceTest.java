@@ -10,6 +10,7 @@ import com.imooc.demo.utils.ComFun;
 import com.imooc.demo.utils.DataBusUtils;
 import com.imooc.demo.utils.DateUtil;
 import com.imooc.demo.vo.A06280102OutVo;
+import com.imooc.demo.vo.A06280103OutVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
@@ -92,12 +93,34 @@ public class ActiServiceTest {
         DataBusUtils.setValue(A0628BeanConstants.ACTI_INFO, actiInfo);
         DataBusUtils.setValue(A0628BeanConstants.SVC_TPCD, "04");
 
-        actiService.dealActiDetail();
+        actiService.dealActiInfo();
 
         // 工厂 产生 响应Vo
         actiInfo  = (ActiInfo) DataBusUtils.getValue(A0628BeanConstants.ACTI_INFO);
         A06280102OutVo outVo = new A06280102OutVo();
+        // actiInfo 可能为null 报错。
         BeanUtils.copyProperties(actiInfo,outVo);
+
+        ComFun.log(gson.toJson(outVo));
+    }
+
+    @Test
+    public void test4DealActiDetail() {
+        ActiDetail actiDetail = new ActiDetail();
+        actiDetail.setActiId("20180507000001");
+        actiDetail.setActiPriceDetail("价格详情");
+        actiDetail.setActiPrepare("准备阶段");
+
+        DataBusUtils.setValue(A0628BeanConstants.ACTI_DETAIL, actiDetail);
+        DataBusUtils.setValue(A0628BeanConstants.SVC_TPCD, "04");
+
+        actiService.dealActiDetail();
+
+        // 工厂 产生 响应Vo
+        actiDetail  = (ActiDetail) DataBusUtils.getValue(A0628BeanConstants.ACTI_DETAIL);
+        A06280103OutVo outVo = new A06280103OutVo();
+        // actiInfo 可能为null 报错。
+        BeanUtils.copyProperties(actiDetail,outVo);
 
         ComFun.log(gson.toJson(outVo));
     }

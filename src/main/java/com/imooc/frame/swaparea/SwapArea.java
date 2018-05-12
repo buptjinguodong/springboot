@@ -1,5 +1,8 @@
+package com.imooc.frame.swaparea;
 
-public interface SwapArea extends Map{
+import java.util.Map;
+
+public interface SwapArea extends Map {
 
 	Object getValue(String path);
 

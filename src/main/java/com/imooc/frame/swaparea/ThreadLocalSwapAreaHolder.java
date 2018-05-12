@@ -1,17 +1,18 @@
+package com.imooc.frame.swaparea;
 
 public class ThreadLocalSwapAreaHolder implements SwapAreaHolder {
 
 	private ThreadLocal<SwapArea> holder = new ThreadLocal<SwapArea>();
 
-	void setCurrentSwapArea(SwapArea swapArea) {
+	public void setCurrentSwapArea(SwapArea swapArea) {
 		holder.set(swapArea);
 	}
 
-	SwapArea getCurrentSwapArea(){
+	public SwapArea getCurrentSwapArea(){
 		return holder.get();
 	}
 
-	SwapArea removeCurrentSwapArea() {
+	public SwapArea removeCurrentSwapArea() {
 		SwapArea swapArea = holder.get();
 
 		holder.remove();

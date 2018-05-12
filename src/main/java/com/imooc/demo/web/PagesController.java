@@ -18,4 +18,9 @@ public class PagesController {
     public String commonParamDetailEdit(){
         return "param/commonParamDetailEdit";
     }
+
+    @RequestMapping(value="/admin/acti/infoEdit")
+    public String adminActiEdit() { return "admin/acti/infoEdit"; }
+
+
 }

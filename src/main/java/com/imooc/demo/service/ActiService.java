@@ -11,5 +11,7 @@ public interface ActiService {
 
     ActiDetail enquireActiDetail(String actiId);
 
+    void dealActiInfo();
+
     void dealActiDetail();
 }
