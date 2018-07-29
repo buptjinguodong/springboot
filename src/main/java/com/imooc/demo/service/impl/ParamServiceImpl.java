@@ -6,6 +6,7 @@ import com.imooc.demo.entity.ParamDetail;
 import com.imooc.demo.entity.ParamDir;
 import com.imooc.demo.service.ParamService;
 import com.imooc.demo.utils.ComFun;
+import com.imooc.frame.exception.CommonException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class ParamServiceImpl implements ParamService {
     }
 
     @Override
-    public void addParamDetail(ParamDetail paramDetail, List<ParamDetail> list1) {
+    public void addParamDetail(ParamDetail paramDetail, List<ParamDetail> list1) throws CommonException {
         int res;
         List<ParamDetail> paramDetailList = queryParamDetail(paramDetail);
         if(paramDetailList.size() > 0){
@@ -45,7 +46,7 @@ public class ParamServiceImpl implements ParamService {
     }
 
     @Override
-    public void deleteParamDetail(ParamDetail paramDetail) {
+    public void deleteParamDetail(ParamDetail paramDetail) throws CommonException {
         int res;
         List<ParamDetail> paramDetailList = queryParamDetail(paramDetail);
         if(paramDetailList.size() > 0){
@@ -54,12 +55,14 @@ public class ParamServiceImpl implements ParamService {
                 throw new RuntimeException("参数：" + paramDetail.getParamSeq() + " 删除失败");
             }
         }else{
-            throw new RuntimeException("参数：" + paramDetail.getParamSeq() + " 不存在");
+//            throw new RuntimeException("参数：" + paramDetail.getParamSeq() + " 不存在");
+            throw new CommonException("YACA16280001");
         }
+
     }
 
     @Override
-    public void editParamDetail(ParamDetail paramDetail, List<ParamDetail> list1) {
+    public void editParamDetail(ParamDetail paramDetail, List<ParamDetail> list1) throws CommonException {
         List<ParamDetail> paramDetailList = queryParamDetail(paramDetail);
         if(paramDetailList.size() > 0){
             ComFun.log("开始删除参数");
@@ -69,7 +72,8 @@ public class ParamServiceImpl implements ParamService {
             addParamDetail(paramDetail, list1);
             ComFun.log("插入参数完成");
         }else{
-            throw new RuntimeException("参数：" + paramDetail.getParamSeq() + " 不存在");
+//            throw new RuntimeException("参数：" + paramDetail.getParamSeq() + " 不存在");
+            throw new CommonException("YACA16280001");
         }
     }
 

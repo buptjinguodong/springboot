@@ -28,6 +28,19 @@ Common.getUrlParam = function(name){
 Common.alert = function(msg){
 	alert(msg);
 };
+Common.msg = {};
+Common.msg.popSuccessMessage = function(msg, succ) {
+
+};
+Common.msg.popWarnMessage = function(msg, succ) {
+
+};
+Common.msg.popErrorMessage = function(msg, succ) {
+
+};
+Common.msg.popConfirmMessage = function(msg, succ, fail) {
+
+};
 
 Common.getFirstChecked = function(allData){
     var selectInd = -1;
@@ -60,7 +73,22 @@ Common.post = function(options){
 		contentType:"application/json;charset=utf-8",
 		data:options.data,
 		success:function(data){
-			options.success(data);
+			if (data.success == "false") {
+				if (typeof options.failure == "function") {
+                    options.failure(data);
+				} else {
+					Common.dealWithFailure(data);
+				}
+			} else {
+                options.success(data);
+			}
 		}
 	});
+};
+
+Common.dealWithFailure = function(data) {
+	var thisVar = this;
+	var flag = data.success;
+	var errorMsg = data.errorMsg;
+
 };

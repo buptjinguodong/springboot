@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.WeatherDailyMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.WeatherDaily" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <id column="date" property="date" jdbcType="VARCHAR" />
+    <result column="text_day" property="textDay" jdbcType="VARCHAR" />
+    <result column="code_day" property="codeDay" jdbcType="VARCHAR" />
+    <result column="text_night" property="textNight" jdbcType="VARCHAR" />
+    <result column="code_night" property="codeNight" jdbcType="VARCHAR" />
+    <result column="high" property="high" jdbcType="VARCHAR" />
+    <result column="low" property="low" jdbcType="VARCHAR" />
+    <result column="precip" property="precip" jdbcType="VARCHAR" />
+    <result column="wind_direction" property="windDirection" jdbcType="VARCHAR" />
+    <result column="wind_direction_degree" property="windDirectionDegree" jdbcType="VARCHAR" />
+    <result column="wind_speed" property="windSpeed" jdbcType="VARCHAR" />
+    <result column="wind_scale" property="windScale" jdbcType="VARCHAR" />
+    <result column="multi_tenancy_id" property="multiTenancyId" jdbcType="VARCHAR" />
+    <result column="vno" property="vno" jdbcType="INTEGER" />
+    <result column="tms" property="tms" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, date, text_day, code_day, text_night, code_night, high, low, precip, wind_direction, 
+    wind_direction_degree, wind_speed, wind_scale, multi_tenancy_id, vno, tms
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.WeatherDailyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from weather_daily
+    where id = #{id,jdbcType=VARCHAR}
+      and date = #{date,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.imooc.demo.entity.WeatherDailyKey" >
+    delete from weather_daily
+    where id = #{id,jdbcType=VARCHAR}
+      and date = #{date,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.imooc.demo.entity.WeatherDaily" >
+    insert into weather_daily (id, date, text_day, 
+      code_day, text_night, code_night, 
+      high, low, precip, 
+      wind_direction, wind_direction_degree, wind_speed, 
+      wind_scale, multi_tenancy_id, vno, 
+      tms)
+    values (#{id,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{textDay,jdbcType=VARCHAR}, 
+      #{codeDay,jdbcType=VARCHAR}, #{textNight,jdbcType=VARCHAR}, #{codeNight,jdbcType=VARCHAR}, 
+      #{high,jdbcType=VARCHAR}, #{low,jdbcType=VARCHAR}, #{precip,jdbcType=VARCHAR}, 
+      #{windDirection,jdbcType=VARCHAR}, #{windDirectionDegree,jdbcType=VARCHAR}, #{windSpeed,jdbcType=VARCHAR}, 
+      #{windScale,jdbcType=VARCHAR}, #{multiTenancyId,jdbcType=VARCHAR}, #{vno,jdbcType=INTEGER}, 
+      #{tms,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.WeatherDaily" >
+    insert into weather_daily
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="textDay != null" >
+        text_day,
+      </if>
+      <if test="codeDay != null" >
+        code_day,
+      </if>
+      <if test="textNight != null" >
+        text_night,
+      </if>
+      <if test="codeNight != null" >
+        code_night,
+      </if>
+      <if test="high != null" >
+        high,
+      </if>
+      <if test="low != null" >
+        low,
+      </if>
+      <if test="precip != null" >
+        precip,
+      </if>
+      <if test="windDirection != null" >
+        wind_direction,
+      </if>
+      <if test="windDirectionDegree != null" >
+        wind_direction_degree,
+      </if>
+      <if test="windSpeed != null" >
+        wind_speed,
+      </if>
+      <if test="windScale != null" >
+        wind_scale,
+      </if>
+      <if test="multiTenancyId != null" >
+        multi_tenancy_id,
+      </if>
+      <if test="vno != null" >
+        vno,
+      </if>
+      <if test="tms != null" >
+        tms,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="textDay != null" >
+        #{textDay,jdbcType=VARCHAR},
+      </if>
+      <if test="codeDay != null" >
+        #{codeDay,jdbcType=VARCHAR},
+      </if>
+      <if test="textNight != null" >
+        #{textNight,jdbcType=VARCHAR},
+      </if>
+      <if test="codeNight != null" >
+        #{codeNight,jdbcType=VARCHAR},
+      </if>
+      <if test="high != null" >
+        #{high,jdbcType=VARCHAR},
+      </if>
+      <if test="low != null" >
+        #{low,jdbcType=VARCHAR},
+      </if>
+      <if test="precip != null" >
+        #{precip,jdbcType=VARCHAR},
+      </if>
+      <if test="windDirection != null" >
+        #{windDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="windDirectionDegree != null" >
+        #{windDirectionDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeed != null" >
+        #{windSpeed,jdbcType=VARCHAR},
+      </if>
+      <if test="windScale != null" >
+        #{windScale,jdbcType=VARCHAR},
+      </if>
+      <if test="multiTenancyId != null" >
+        #{multiTenancyId,jdbcType=VARCHAR},
+      </if>
+      <if test="vno != null" >
+        #{vno,jdbcType=INTEGER},
+      </if>
+      <if test="tms != null" >
+        #{tms,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.WeatherDaily" >
+    update weather_daily
+    <set >
+      <if test="textDay != null" >
+        text_day = #{textDay,jdbcType=VARCHAR},
+      </if>
+      <if test="codeDay != null" >
+        code_day = #{codeDay,jdbcType=VARCHAR},
+      </if>
+      <if test="textNight != null" >
+        text_night = #{textNight,jdbcType=VARCHAR},
+      </if>
+      <if test="codeNight != null" >
+        code_night = #{codeNight,jdbcType=VARCHAR},
+      </if>
+      <if test="high != null" >
+        high = #{high,jdbcType=VARCHAR},
+      </if>
+      <if test="low != null" >
+        low = #{low,jdbcType=VARCHAR},
+      </if>
+      <if test="precip != null" >
+        precip = #{precip,jdbcType=VARCHAR},
+      </if>
+      <if test="windDirection != null" >
+        wind_direction = #{windDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="windDirectionDegree != null" >
+        wind_direction_degree = #{windDirectionDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="windSpeed != null" >
+        wind_speed = #{windSpeed,jdbcType=VARCHAR},
+      </if>
+      <if test="windScale != null" >
+        wind_scale = #{windScale,jdbcType=VARCHAR},
+      </if>
+      <if test="multiTenancyId != null" >
+        multi_tenancy_id = #{multiTenancyId,jdbcType=VARCHAR},
+      </if>
+      <if test="vno != null" >
+        vno = #{vno,jdbcType=INTEGER},
+      </if>
+      <if test="tms != null" >
+        tms = #{tms,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+      and date = #{date,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.WeatherDaily" >
+    update weather_daily
+    set text_day = #{textDay,jdbcType=VARCHAR},
+      code_day = #{codeDay,jdbcType=VARCHAR},
+      text_night = #{textNight,jdbcType=VARCHAR},
+      code_night = #{codeNight,jdbcType=VARCHAR},
+      high = #{high,jdbcType=VARCHAR},
+      low = #{low,jdbcType=VARCHAR},
+      precip = #{precip,jdbcType=VARCHAR},
+      wind_direction = #{windDirection,jdbcType=VARCHAR},
+      wind_direction_degree = #{windDirectionDegree,jdbcType=VARCHAR},
+      wind_speed = #{windSpeed,jdbcType=VARCHAR},
+      wind_scale = #{windScale,jdbcType=VARCHAR},
+      multi_tenancy_id = #{multiTenancyId,jdbcType=VARCHAR},
+      vno = #{vno,jdbcType=INTEGER},
+      tms = #{tms,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+      and date = #{date,jdbcType=VARCHAR} and vno = #{vno,jdbcType=INTEGER}-1
+  </update>
+</mapper>

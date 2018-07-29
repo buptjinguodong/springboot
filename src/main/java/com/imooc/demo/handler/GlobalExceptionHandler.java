@@ -1,5 +1,6 @@
 package com.imooc.demo.handler;
 
+import com.imooc.frame.exception.CommonException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,17 @@ public class GlobalExceptionHandler {
         Map<String, Object> modelMap  = new HashMap<String, Object>();
         modelMap.put("success", false);
         modelMap.put("errMsg", e.getMessage());
+        return modelMap;
+    }
+
+    @ExceptionHandler(value=CommonException.class)
+    // 直接放回错误信息
+    @ResponseBody
+    private Map<String, Object> commonExceptionHandler(HttpServletRequest req, CommonException e){
+        Map<String, Object> modelMap  = new HashMap<String, Object>();
+        modelMap.put("success", false);
+        modelMap.put("errorCode", e.getCode());
+        modelMap.put("errorMsg", e.getMessage());
         return modelMap;
     }
 }

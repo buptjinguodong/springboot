@@ -1,0 +1,7 @@
+DongGe Going
+application.version: ${application.version}
+application.formatted-version: ${application.formatted-version}
+spring-boot.version: ${spring-boot.version}
+spring-boot.formatted-version: ${spring-boot.formatted-version}
+AnsiBackground.BRIGHT_GREEN: ${AnsiBackground.BRIGHT_GREEN}
+application.title: ${application.title}
