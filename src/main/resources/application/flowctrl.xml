@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<flowctrl isctrl = "0">
+    <ctrlpoint>
+        <point id="req" value="3,5"/>
+        <point id="out" value="3"/>
+    </ctrlpoint>
+    <noctrlresource>
+        <resgroup id="1" name="['_service_id']" type="single">
+            <resmember id="ParamCmd0001,ParaCmd0002,ParaCmd0003" />
+            <resmember id="FlowctrlCmd001,FlowctrlCmd002,FlowctrlCmd003,FlowctrlCmd004,FlowctrlCmd005,FlowctrlCmd006,FlowctrlCmd007,FlowctrlCmd008,FlowctrlCmd009,FlowctrlCmd010,FlowctrlCmd011,FlowctrlCmd012,FlowctrlCmd013,FlowctrlCmd014,FlowctrlCmd015,FlowctrlCmd016,FlowctrlCmd017,FlowctrlCmd018,FlowctrlCmd019,FlowctrlCmd020,FlowctrlCmd021,FlowctrlCmd022,FlowctrlCmd023" />
+            <resmember id="F3Timeout,F3TOquery,F3Hdb0001" />
+            <resmember id="BKCOM0001,BKCOM0002,BKCOM0003" />
+        </resgroup>
+    </noctrlresource>
+    <resource>
+        <resgroup id="1" name="global" type="absolute" flowtype="all" flowtypedesc="全局">
+            <resmember id="global" quantity="50" strategy="default" />
+        </resgroup>
+        <!-- type="percentage" total="100" 成对出现 -->
+        <resgroup id="2"
+                  name="['_service_id'],['_in_data'].msgBody.msgBodyCommon.com1.txn_itt_chnl_id"
+                  type="percentage" total="100" flowtype="service\channel"
+                  flowtypedesc="svc\cha">
+            <resmember id="F30060002,2" percentage="10" strategy="default" />
+            <resmember id="0002,S002" percentage="30" strategy="default" />
+        </resgroup>
+        <!-- type="both", 取最小值 -->
+        <resgroup id="3" name="['_service_id']" type="absolute">
+            <resmember id="A02810001" quantity="100" strategy="default" />
+            <resmember id="A02810002" quantity="0" strategy="default" />
+            <resmember id="A02810003" quantity="4" strategy="testflow" />
+        </resgroup>
+        <!-- 示例：针对报文实体域中的paramkey字段流控 -->
+        <resgroup id="4" name="['_in_data'].msgBody.msgBodyEntity.paramkey"
+                  type="absolute">
+            <resmember id="param1" quantity="10" strategy="default" />
+            <resmember id="param99" quantity="1" strategy="default" />
+        </resgroup>
+        <resgroup id="5"
+                  name="['_service_id'],['_in_data'].msgBody.msgBodyEntity.prodName"
+                  type="percentage" total="10" flowtype="service\name" flowtypedesc="svc\name">
+            <resmember id="A02810001,telephone" percentage="10" strategy="default" />
+            <resmember id="A02810002,telephone1" percentage="10" strategy="default" />
+            <resmember id="A02810003" percentage="50" strategy="default" />
+        </resgroup>
+        <resgroup id="6"
+                  name="['_in_data'].magBody.msgBodyEntity.buyerId,['_in_data'].msgBody.msgBodyEntity.buyerName"
+                  type="percentage" total="1000" flowtype="pers\name" flowtypedesc="pers\name">
+            <resmember id="cus001,tom" percentage="10" strategy="default" />
+            <resmember id="cus002" percentage="20" strategy="default" />
+        </resgroup>
+        <resgroup id="7" name="['_in_data'].msgBody.msgBodyEntity.orderId"
+                  type="both" total="1000">
+            <resmember id="order001" percentage="10" strategy="default" />
+            <resmember id="order002" percentage="10" strategy="default" />
+        </resgroup>
+
+        <!-- 接入为map方式的示例 -->
+        <resgroup id="8"
+                  name="['_service_id'],[_in_data']['TX_BODY']['ENTITY']['PROD_ID']"
+                  type="absolute">
+            <resmember id="A02810001,10001" quantity="1" strategy="default" />
+        </resgroup>
+
+        <!-- 取交易码的前5位作为流量资源id,进行流控 -->
+        <resgroup id="9"
+                  name="['_service_id']" type="absolute"
+                  groupstrategy="substr5">
+            <resmember id="A0281" quantity="10" strategy="default" />
+        </resgroup>
+    </resource>
+    <strategy>
+        <stgymember name="default"
+                    classname="com.imooc.frame.flowctrl.strategy.DefaultFlowStrategy" />
+    </strategy>
+    <!-- 自定义流控资源策略 -->
+    <strategy>
+        <stgymember name="testflow"
+                    classname="com.imooc.demo.service.impl.TestFlowStrategy" />
+    </strategy>
+    <!-- 流控资源组策略 -->
+    <groupstrategy>
+        <stgymenber name="substr5"
+                    classname="com.imooc.frame.flowctrl.strategy.SubstrGroupStrategy" />
+    </groupstrategy>
+</flowctrl>

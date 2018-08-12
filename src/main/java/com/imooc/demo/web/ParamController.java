@@ -9,6 +9,7 @@ import com.imooc.demo.utils.ConstantUtil;
 import com.imooc.demo.vo.A06280201OutVo;
 import com.imooc.demo.vo.A06280202InVo;
 import com.imooc.demo.vo.A06280202OutVo;
+import com.imooc.frame.exception.CommonException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class ParamController {
     }
 
     @RequestMapping("/A06280202")
-    public A06280202OutVo editParamDetail(@RequestBody A06280202InVo inVo){
+    public A06280202OutVo editParamDetail(@RequestBody A06280202InVo inVo) throws CommonException {
         List<ParamDetail> list1 = inVo.getList1();
         String svcTpcd = inVo.getSvcTpcd();
         ParamDetail paramDetail = new ParamDetail();

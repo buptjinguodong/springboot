@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.imooc.demo.entity.ParamDetail;
 import com.imooc.demo.entity.ParamDir;
 import com.imooc.demo.utils.ComFun;
+import com.imooc.frame.exception.CommonException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ParamServiceTest {
     }
 
     @Test
-    public void testaddParamDetail(){
+    public void testaddParamDetail() throws CommonException {
         ParamDetail paramDetail = new ParamDetail();
         paramDetail.setParamSeq("0000000002");
         List<ParamDetail> list1 = new ArrayList<ParamDetail>();
@@ -56,7 +57,7 @@ public class ParamServiceTest {
     }
 
     @Test
-    public void testdeleteParamDetail(){
+    public void testdeleteParamDetail() throws CommonException {
         ParamDetail paramDetail = new ParamDetail();
         paramDetail.setParamSeq("0000000002");
         paramService.deleteParamDetail(paramDetail);
@@ -64,7 +65,7 @@ public class ParamServiceTest {
     }
 
     @Test
-    public void testeditParamDetail(){
+    public void testeditParamDetail() throws CommonException {
         ParamDetail paramDetail = new ParamDetail();
         paramDetail.setParamSeq("0000000002");
         List<ParamDetail> list1 = new ArrayList<ParamDetail>();

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.WeatherLocationMapper" >
+  <resultMap id="BaseResultMap" type="com.imooc.demo.entity.WeatherLocation" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="timezone" property="timezone" jdbcType="VARCHAR" />
+    <result column="timezone_offset" property="timezoneOffset" jdbcType="VARCHAR" />
+    <result column="multi_tenancy_id" property="multiTenancyId" jdbcType="VARCHAR" />
+    <result column="vno" property="vno" jdbcType="INTEGER" />
+    <result column="tms" property="tms" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, country, path, timezone, timezone_offset, multi_tenancy_id, vno, tms
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from weather_location
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from weather_location
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from weather_location
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.imooc.demo.entity.WeatherLocation" >
+    insert into weather_location (id, name, country, 
+      path, timezone, timezone_offset, 
+      multi_tenancy_id, vno, tms
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{timezone,jdbcType=VARCHAR}, #{timezoneOffset,jdbcType=VARCHAR}, 
+      #{multiTenancyId,jdbcType=VARCHAR}, #{vno,jdbcType=INTEGER}, #{tms,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.imooc.demo.entity.WeatherLocation" >
+    insert into weather_location
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="timezone != null" >
+        timezone,
+      </if>
+      <if test="timezoneOffset != null" >
+        timezone_offset,
+      </if>
+      <if test="multiTenancyId != null" >
+        multi_tenancy_id,
+      </if>
+      <if test="vno != null" >
+        vno,
+      </if>
+      <if test="tms != null" >
+        tms,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="timezone != null" >
+        #{timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="timezoneOffset != null" >
+        #{timezoneOffset,jdbcType=VARCHAR},
+      </if>
+      <if test="multiTenancyId != null" >
+        #{multiTenancyId,jdbcType=VARCHAR},
+      </if>
+      <if test="vno != null" >
+        #{vno,jdbcType=INTEGER},
+      </if>
+      <if test="tms != null" >
+        #{tms,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imooc.demo.entity.WeatherLocation" >
+    update weather_location
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="timezone != null" >
+        timezone = #{timezone,jdbcType=VARCHAR},
+      </if>
+      <if test="timezoneOffset != null" >
+        timezone_offset = #{timezoneOffset,jdbcType=VARCHAR},
+      </if>
+      <if test="multiTenancyId != null" >
+        multi_tenancy_id = #{multiTenancyId,jdbcType=VARCHAR},
+      </if>
+      <if test="vno != null" >
+        vno = #{vno,jdbcType=INTEGER},
+      </if>
+      <if test="tms != null" >
+        tms = #{tms,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.WeatherLocation" >
+    update weather_location
+    set name = #{name,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      timezone = #{timezone,jdbcType=VARCHAR},
+      timezone_offset = #{timezoneOffset,jdbcType=VARCHAR},
+      multi_tenancy_id = #{multiTenancyId,jdbcType=VARCHAR},
+      vno = #{vno,jdbcType=INTEGER},
+      tms = #{tms,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR} and vno = #{vno,jdbcType=INTEGER}-1
+
+  </update>
+</mapper>
