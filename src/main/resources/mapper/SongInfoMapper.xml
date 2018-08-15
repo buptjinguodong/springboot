@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.demo.dao.SongInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.imooc.demo.entity.SongInfo" >
+        <id column="song_id" property="songId" jdbcType="INTEGER" />
+        <result column="songer_id" property="songerId" jdbcType="INTEGER" />
+        <result column="song_word" property="songWord" jdbcType="VARCHAR" />
+        <result column="song_title" property="songTitle" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="DATE" />
+        <result column="update_time" property="updateTime" jdbcType="DATE" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    song_id, songer_id, song_word, create_time, update_time, song_title
+  </sql>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="com.imooc.demo.entity.SongInfo" >
+        select
+        <include refid="Base_Column_List" />
+        from song_info
+        where 1=1
+        <if test="songId != null and songId !=''" >
+            and song_id = #{songId,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from song_info
+        where song_id = #{songId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from song_info
+    where song_id = #{songId,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.imooc.demo.entity.SongInfo" >
+    insert into song_info (song_id, songer_id, song_word, song_title)
+    values (#{songId,jdbcType=INTEGER}, #{songerId,jdbcType=INTEGER}, #{songWord,jdbcType=VARCHAR}, #{songTitle,jdbcType=VARCHAR})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.imooc.demo.entity.SongInfo" >
+    update song_info
+    set
+      songer_id = #{songerId,jdbcType=INTEGER},
+      song_word = #{songWord,jdbcType=VARCHAR},
+      song_title = #{songTitle,jdbcType=VARCHAR}
+    where song_id = #{songId,jdbcType=INTEGER}
+  </update>
+</mapper>
